@@ -37,6 +37,6 @@ Constraints:
 
 if __name__ == "__main__":
     sys.exit(subprocess.run(
-        ["claude", "-p", "--dangerously-skip-permissions", GOAL.strip()],
-        cwd=REPO,
+        ["claude", "-p", "--allowedTools", "Read,Edit,Write,Bash,Glob"],
+        input=GOAL.strip(), text=True, cwd=REPO,
     ).returncode)

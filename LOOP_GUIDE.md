@@ -84,8 +84,8 @@ Do not stop early. Loop until the stop condition is provably met.
 
 if __name__ == "__main__":
     sys.exit(subprocess.run(
-        ["claude", "-p", "--dangerously-skip-permissions", GOAL.strip()],
-        cwd=REPO,
+        ["claude", "-p", "--allowedTools", "Read,Edit,Write,Bash,Glob"],
+        input=GOAL.strip(), text=True, cwd=REPO,
     ).returncode)
 ```
 
@@ -123,4 +123,4 @@ Your existing test suite is the verifier. Claude doesn't decide when a task is d
 - **Test command must be deterministic.** Flaky tests break the loop. Fix flakiness before looping.
 - **Constrain the blast radius.** The tighter your `Constraints` field, the less Claude can accidentally break.
 - **Add a budget if you want a guardrail.** Track pass count in your loop script and halt after N passes if the suite is still red.
-- **`--dangerously-skip-permissions` is intentional.** The loop runs non-interactively. Scope the risk by constraining which files Claude can edit in the goal prompt.
+- **`--allowedTools` scopes the blast radius.** Only grant the tools the loop actually needs (`Read,Edit,Write,Bash,Glob`). This runs non-interactively without bypassing all permissions.
