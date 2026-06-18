@@ -4,7 +4,10 @@
       "Bash(python3 reset.py)",
       "Bash(python3 loop.py)",
       "Bash(claude --version)",
-      "Bash(python3 loop.py --agent claude)"
+      "Bash(python3 loop.py --agent claude)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
